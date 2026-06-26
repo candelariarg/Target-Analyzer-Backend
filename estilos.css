@@ -1,0 +1,246 @@
+/* ==========================
+   VARIABLES GLOBALES
+========================== */
+
+:root {
+
+    --fondo-absoluto: #000000;
+    --fondo-panel: #0a0a0a;
+
+    --color-terminal: #00ff66;
+    --color-alerta: #ffb300;
+
+    --borde-terminal: 1px solid var(--color-terminal);
+
+    --brillo-verde: 0 0 10px rgba(0,255,102,0.5);
+    --brillo-alerta: 0 0 10px rgba(255,179,0,0.7);
+
+}
+
+/* ==========================
+   RESET
+========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ==========================
+   BODY
+========================== */
+
+body {
+
+    background-color: var(--fondo-absoluto);
+    color: var(--color-terminal);
+
+    font-family: 'Courier New', Courier, monospace;
+
+    height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* ==========================
+   CONTENEDOR PRINCIPAL
+========================== */
+
+.bunker-container {
+
+    width: 95%;
+    max-width: 1200px;
+
+    height: 90vh;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+/* ==========================
+   CONSOLA SUPERIOR
+========================== */
+
+.consola-input {
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 20px;
+
+    border: var(--borde-terminal);
+
+    box-shadow: var(--brillo-verde);
+
+    background-color: var(--fondo-panel);
+
+}
+
+.prompt-text {
+
+    font-weight: bold;
+
+}
+
+.consola-input input {
+
+    flex-grow: 1;
+
+    background: transparent;
+    border: none;
+
+    border-bottom: 1px solid var(--color-terminal);
+
+    color: var(--color-terminal);
+
+    font-family: inherit;
+
+    font-size: 1.2rem;
+
+    outline: none;
+
+}
+
+.consola-input button {
+
+    padding: 10px 20px;
+
+    background-color: var(--color-terminal);
+
+    color: black;
+
+    border: none;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+.consola-input button:hover {
+
+    background-color: var(--color-alerta);
+
+    box-shadow: var(--brillo-alerta);
+
+}
+
+/* ==========================
+   GRID PRINCIPAL
+========================== */
+
+.grid-paneles {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    grid-template-rows: 1fr 1fr;
+
+    gap: 20px;
+
+    flex-grow: 1;
+
+}
+
+/* ==========================
+   PANELES
+========================== */
+
+.panel {
+
+    background-color: var(--fondo-panel);
+
+    border: var(--borde-terminal);
+
+    box-shadow: var(--brillo-verde);
+
+    padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.panel-titulo {
+
+    border-bottom: 1px dashed var(--color-terminal);
+
+    padding-bottom: 10px;
+
+    margin-bottom: 15px;
+
+    font-size: 1.1rem;
+
+}
+
+.contenido-panel {
+
+    flex-grow: 1;
+
+    line-height: 1.5;
+
+}
+
+/* ==========================
+   PANEL CON SCROLL
+========================== */
+
+.scroll-activo {
+
+    overflow-y: auto;
+
+    max-height: 100%;
+
+}
+
+/* ==========================
+   SCROLL PERSONALIZADO
+========================== */
+
+.scroll-activo::-webkit-scrollbar {
+
+    width: 8px;
+
+}
+
+.scroll-activo::-webkit-scrollbar-thumb {
+
+    background-color: var(--color-terminal);
+
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 768px) {
+
+    .grid-paneles {
+
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+
+    }
+
+    .consola-input {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+}

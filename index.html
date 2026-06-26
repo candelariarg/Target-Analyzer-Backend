@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Target Analyzer MVP</title>
+
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+    <div class="bunker-container">
+
+        <header class="consola-input">
+
+            <span class="prompt-text">[TARGET_URL]:</span>
+
+            <input type="text" id="target-url" placeholder="Ingrese dominio objetivo..." autocomplete="off">
+
+            <button id="btn-scan">
+                [INICIAR_ESCANEO]
+            </button>
+
+        </header>
+
+        <main class="grid-paneles">
+
+            <!-- Vista -->
+
+            <section class="panel" id="panel-vista">
+
+                <h2 class="panel-titulo">
+                    VISTA
+                </h2>
+
+                <div class="contenido-panel">
+
+                    <p>
+                        Esperando análisis...
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- Tecnología -->
+
+            <section class="panel" id="panel-tecnologia">
+
+                <h2 class="panel-titulo">
+                    TECNOLOGÍA
+                </h2>
+
+                <div class="contenido-panel">
+
+                    <p>
+                        Sin datos.
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- Historial -->
+
+            <section class="panel" id="panel-enlaces">
+
+                <h2 class="panel-titulo">
+                    HISTORIAL DE ESCANEOS
+                </h2>
+
+                <div class="contenido-panel scroll-activo">
+
+                    <ul id="lista-historial">
+
+                        <li>Sin resultados.</li>
+
+                    </ul>
+
+                </div>
+
+            </section>
+
+            <!-- Métricas -->
+
+            <section class="panel" id="panel-metricas">
+
+                <h2 class="panel-titulo">
+                    MÉTRICAS
+                </h2>
+
+                <div class="contenido-panel">
+
+                    <p>
+                        Sin métricas disponibles.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="emisor_script.js"></script>
+
+</body>
+
+</html>
