@@ -16,6 +16,23 @@ let totalEscaneos = 0;
 app.use(cors());
 app.use(express.json());
 
+    /* Verificar si el texto recibido es una URL válida */
+    function esUrlValida(url) {
+        
+        try {
+            
+            new URL(url);
+            return true;
+
+    } catch {
+
+        return false;
+
+    }
+
+}
+
+
 app.post('/api/escanear', (req, res) => {
 
     /* Verificar si se alcanzó el límite de escaneos */
@@ -31,6 +48,16 @@ app.post('/api/escanear', (req, res) => {
 
     /* URL recibida desde el Frontend */
     const urlRecibida = req.body.url;
+
+    /* Validar que la URL tenga un formato correcto */
+     if (!esUrlValida(urlRecibida)) {
+        
+        return res.status(400).json({
+            estado: 'ERROR',
+            mensaje: '[URL INVALIDA]: ingrese una direccion web valida'
+        });
+        
+     }
 
     console.log(`[ALERTA] Objetivo recibido en coordenadas: ${urlRecibida}`);
 

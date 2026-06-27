@@ -48,7 +48,7 @@ async function iniciarOperacion() {
 
         const datos = await respuesta.json();
 
-        /* repeus del limite alcnzado del conyador */
+        /*  limite alcnzado del contador */
         if (!respuesta.ok) {
             
             panelTech.innerHTML = `
