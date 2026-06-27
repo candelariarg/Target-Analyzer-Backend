@@ -49,6 +49,17 @@ app.post('/api/escanear', (req, res) => {
     /* URL recibida desde el Frontend */
     const urlRecibida = req.body.url;
 
+    /* Verificar si la URL ya fue escaneada */
+    const urlRepetida = historial.some(item => item.url === urlRecibida);
+    
+    if (urlRepetida){
+        
+        return res.status(409).json({
+            estado: 'ERROR',
+            mensaje: '[URL REPETIDA] Esta direccion ya fue escaneada' 
+        })
+    }
+
     /* Validar que la URL tenga un formato correcto */
      if (!esUrlValida(urlRecibida)) {
         
