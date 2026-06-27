@@ -1,16 +1,33 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-
 const PUERTO = 3000;
 
 /* Historial de los escaneos realizados */
 const historial = [];
 
+/* configuracion del servidor */
+const LIMITE_HISTORIAL = 50;
+const LIMITE_ESCANEOS = 100;
+
+let totalEscaneos = 0;
+
+
 app.use(cors());
 app.use(express.json());
 
 app.post('/api/escanear', (req, res) => {
+
+    /* Verificar si se alcanzó el límite de escaneos */
+    if (totalEscaneos >= LIMITE_ESCANEOS){
+        
+        return res.status(403).json({
+            estado: 'ERROR',
+            mensaje: '[LÍMITE ALCANZADO]: No se permiten más escaneos.',
+            totalEscaneos,
+            limite: LIMITE_ESCANEOS
+        });
+    }
 
     /* URL recibida desde el Frontend */
     const urlRecibida = req.body.url;
@@ -19,6 +36,7 @@ app.post('/api/escanear', (req, res) => {
 
     /* Crear un nuevo registro del escaneo */
     const entrada = {
+        id: totalEscaneos + 1,
         url: urlRecibida,
         fecha: new Date().toLocaleString(),
         estado: 'ESCANEADO'
@@ -27,8 +45,12 @@ app.post('/api/escanear', (req, res) => {
     /* Guardar el registro en el historial */
     historial.push(entrada);
 
+    /* esto incrementa el contados de los escaneos */
+    totalEscaneos++;
+
+
     /* Mantener solo los últimos 50 escaneos */
-    if (historial.length > 50) {
+    if (historial.length >  LIMITE_HISTORIAL) {
         historial.shift();
     }
 
@@ -37,7 +59,9 @@ app.post('/api/escanear', (req, res) => {
         estado: 'EXITO',
         mensaje: '[ENLACE ESTABLECIDO]: Servidor a la espera del Robot.',
         objetivo: urlRecibida,
-        historial
+        historial,
+        totalEscaneos,
+        limite: LIMITE_ESCANEOS
     });
 
 });

@@ -48,12 +48,28 @@ async function iniciarOperacion() {
 
         const datos = await respuesta.json();
 
+        /* repeus del limite alcnzado del conyador */
+        if (!respuesta.ok) {
+            
+            panelTech.innerHTML = `
+                <span style="color:red">
+                ${datos.mensaje}
+                </span>
+                `;
+
+            return;
+}
+
         /* Mostrar el estado del servidor */
 
         panelTech.innerHTML =
-            `<span style="color: var(--color-terminal)">
-                ${datos.mensaje}
-            </span>`;
+    `
+            <span style="color: var(--color-terminal)">
+            ${datos.mensaje}
+            </span>
+            <br><br>
+            <strong>Escaneos:</strong> ${datos.totalEscaneos} / ${datos.limite}
+            `;
 
         /* Actualizar el historial recibido */
 
@@ -63,7 +79,8 @@ async function iniciarOperacion() {
 
             listaHistorial.innerHTML += `
                 <li>
-                    <strong>${item.url}</strong><br>
+                    <strong>#${item.id}</strong><br>
+                    ${item.url}<br>
                     <small>${item.fecha}</small>
                 </li>
             `;
